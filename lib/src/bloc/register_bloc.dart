@@ -36,6 +36,7 @@ class RegisterBloc extends Bloc<RegisterEvent,RegisterState>{
 
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent registerEvent) async* {
+
       if(registerEvent is RegisterEventEmailChanged){
         yield state.cloneAndUpdate(
           isValidEmail: Validators.isValidEmail(registerEvent.email),

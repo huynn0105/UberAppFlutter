@@ -5,7 +5,7 @@ class Validators{
   }
   static isValidPassword(String password) => password.length >= 3;
 
-  static isValidPhone(String phone) => phone.length > 0 && phone.isNotEmpty;
+  static isValidPhone(String phone) => phone.length > 3;
 
-  static isValidName(String name) => name.length > 0 && name.isNotEmpty;
+  static isValidName(String name) => name.length > 3;
 }

@@ -1,29 +1,17 @@
 
 import 'package:UberApp/src/bloc/auth_bloc.dart';
 import 'package:UberApp/src/bloc/login_bloc.dart';
-import 'package:UberApp/src/bloc/register_bloc.dart';
 import 'package:UberApp/src/events/auth_event.dart';
 import 'package:UberApp/src/events/login_event.dart';
-import 'package:UberApp/src/firebase/firebase_auth.dart';
 import 'package:UberApp/src/resource/register_page.dart';
-import 'package:UberApp/src/states/auth_state.dart';
 import 'package:UberApp/src/states/login_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_dialog/progress_dialog.dart';
-import 'dialog/loading_dialog.dart';
-import 'package:meta/meta.dart';
 
 class LoginPage extends StatefulWidget {
-  final FirAuth _firAuth;
-
-  LoginPage({Key key, @required FirAuth firAuth}):
-      assert(firAuth != null),
-      _firAuth = firAuth,
-      super(key: key);
-
   @override
   State<StatefulWidget> createState() =>  _LoginPageState();
 
@@ -34,12 +22,18 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   ProgressDialog pr;
   LoginBloc _loginBloc;
-  FirAuth get _firAuth => widget._firAuth;
 
   @override
   void initState() {
     super.initState();
+
+
     _loginBloc = BlocProvider.of<LoginBloc>(context);
+
+
+
+
+
     _emailController.addListener(()=> _loginBloc.add(LoginEventEmailChanged(email: _emailController.text)));
     _passwordController.addListener(()=> _loginBloc.add(LoginEventPasswordChanged(password: _passwordController.text)));
 
@@ -161,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                                         style: TextStyle(fontSize: 16,color: Colors.blueAccent,fontWeight: FontWeight.bold),
                                         recognizer: TapGestureRecognizer()..onTap = (){
                                           Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                                            return RegisterPage(firAuth: _firAuth,);
+                                            return RegisterPage();
                                           }));
                                         }
                                     )

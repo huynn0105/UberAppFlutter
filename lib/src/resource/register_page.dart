@@ -1,11 +1,7 @@
 import 'package:UberApp/src/bloc/auth_bloc.dart';
-import 'package:UberApp/src/bloc/login_bloc.dart';
 import 'package:UberApp/src/bloc/register_bloc.dart';
 import 'package:UberApp/src/events/auth_event.dart';
 import 'package:UberApp/src/events/register_event.dart';
-import 'package:UberApp/src/firebase/firebase_auth.dart';
-import 'package:UberApp/src/resource/home_page.dart';
-import 'package:UberApp/src/states/auth_state.dart';
 import 'package:UberApp/src/states/register_state.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
 class RegisterPage extends StatefulWidget {
-  final FirAuth _firAuth;
-
-
-  RegisterPage({Key key, @required FirAuth firAuth}):
-        assert(firAuth != null),
-        _firAuth = firAuth,
-        super(key: key);
 
   @override
   State<StatefulWidget> createState() => _RegisterPageState();
@@ -29,7 +18,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  FirAuth get _firAuth => widget._firAuth;
   ProgressDialog pr;
   RegisterBloc _registerBloc;
   final TextEditingController _nameController = new TextEditingController();
@@ -94,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
               pr.hide();
             });
             BlocProvider.of<AuthBloc>(context).add(AuthEventLoggedIn());
-
+            Navigator.pop(context);
           }
           return Container(
               color: Colors.white,
